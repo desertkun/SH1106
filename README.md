@@ -2,5 +2,5 @@
 
 * STM32F103x devices
 * SPI2 is configured by default
-* You might think your device hase SD1309 but chances are you have SH1106 instead
+* You might think your device has SSD1309 but chances are you have SH1106 instead
 
