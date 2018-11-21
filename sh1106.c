@@ -1,5 +1,5 @@
 #include <sh1106.h>
-
+#include <string.h>
 
 // Screen dimensions
 uint16_t scr_width  = SCR_W;
@@ -120,12 +120,15 @@ void SH1106_Init(void) {
 	//         set   - enable COM left/right remap
 	SH1106_cmd_double(SH1106_CMD_COM_HW,0x12);
 
-	// Set Vcomh deselect level, values: 0x00, 0x10, 0x20, 0x30, 0x40, 0x50, 0x60, 0x70
-	// This value affects on contrast level
-	SH1106_cmd_double(SH1106_CMD_VCOMH,0x30); // ~0.83V x Vcc
+	uint8_t dis_charge = 0x00;
+	uint8_t pre_charge = 0x00;
+
+	SH1106_cmd_double(SH1106_CMD_CHARGE, dis_charge | (pre_charge << 4));
 
 	// Set contrast control
-	SH1106_cmd_double(SH1106_CMD_CONTRAST,0x7F); // Contrast: middle level
+	SH1106_cmd_double(SH1106_CMD_CONTRAST, 0x0F); // Contrast: middle level
+
+	SH1106_cmd(0x30);
 
 	// Disable entire display ON
 	SH1106_cmd(SH1106_CMD_EDOFF); // Display follows RAM content
@@ -1151,4 +1154,9 @@ void LCD_DrawBitmap(uint8_t X, uint8_t Y, uint8_t W, uint8_t H, const uint8_t* p
 		}
 		pY += 8;
 	}
+}
+
+void LCD_DrawBitmapFullscreen(const uint8_t* pBMP)
+{
+	memcpy(vRAM, pBMP, (SCR_W * SCR_H) >> 3);
 }

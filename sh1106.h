@@ -14,7 +14,7 @@
 // Use bit-banding to draw pixel
 //   0 - use logic operations to set pixel color
 //   1 - use bit-banding to set pixel color
-#define SH1106_USE_BITBAND   1
+#define SH1106_USE_BITBAND   0
 
 // Pixel set function definition
 //   0 - call pixel function (less code size in cost of speed)
@@ -81,7 +81,7 @@
 #define SH1106_CMD_COL_HIGH  (uint8_t)0x10 // Set Higher Column Address
 #define SH1106_CMD_PAGE_ADDR (uint8_t)0xB0 // Set Page Address
 
-#define SH1106_CMD_VCOMH     (uint8_t)0xDB // Set Vcomh deselect level
+#define SH1106_CMD_CHARGE    (uint8_t)0x22 //  Dis-charge / Pre-charge Period
 #define SH1106_CMD_SCRL_HR   (uint8_t)0x26 // Setup continuous horizontal scroll right
 #define SH1106_CMD_SCRL_HL   (uint8_t)0x27 // Setup continuous horizontal scroll left
 #define SH1106_CMD_SCRL_VHR  (uint8_t)0x29 // Setup continuous vertical and horizontal scroll right
@@ -216,5 +216,6 @@ uint8_t LCD_PutIntLZ(uint8_t X, uint8_t Y, int32_t num, uint8_t digits, const Fo
 uint8_t LCD_PutHex(uint8_t X, uint8_t Y, uint32_t num, const Font_TypeDef *Font);
 
 void LCD_DrawBitmap(uint8_t X, uint8_t Y, uint8_t W, uint8_t H, const uint8_t* pBMP);
+void LCD_DrawBitmapFullscreen(const uint8_t* pBMP);
 
 #endif // __SH1106_H
