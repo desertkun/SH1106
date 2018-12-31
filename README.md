@@ -3,4 +3,4 @@
 * STM32F103x devices
 * SPI2 is configured by default
 * You might think your device has SSD1309 but chances are you have SH1106 instead
-
+* Font examples can be found in [my parent project](https://github.com/desertkun/pods/tree/master/inc).
